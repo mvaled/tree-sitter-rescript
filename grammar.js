@@ -464,6 +464,7 @@ module.exports = grammar({
         $.extension_expression,
         $.lazy_expression,
         $._jsx_element,
+        $.regex,
       ),
 
     parenthesized_expression: ($) =>
@@ -752,6 +753,7 @@ module.exports = grammar({
         $.number,
         $.true,
         $.false,
+        $.regex,
       ),
 
     variant_pattern: ($) =>
@@ -1184,6 +1186,30 @@ module.exports = grammar({
     module_identifier: ($) => /[A-Z][a-zA-Z0-9_']*/,
 
     extension_identifier: ($) => /[a-zA-Z0-9_\.]+/,
+
+    regex: ($) =>
+      seq(
+        "/",
+        field("pattern", $.regex_pattern),
+        token.immediate(prec(1, "/")),
+        optional(field("flags", $.regex_flags)),
+      ),
+
+    regex_pattern: (_) =>
+      token.immediate(
+        prec(
+          -1,
+          repeat1(
+            choice(
+              seq("[", repeat(choice(seq("\\", /./), /[^\]\n\\]/)), "]"),
+              seq("\\", /./),
+              /[^/\\\[\n]/,
+            ),
+          ),
+        ),
+      ),
+
+    regex_flags: (_) => token.immediate(/[a-z]+/),
 
     number: ($) => {
       // OCaml: https://github.com/tree-sitter/tree-sitter-ocaml/blob/f1106bf834703f1f2f795da1a3b5f8f40174ffcc/ocaml/grammar.js#L26
