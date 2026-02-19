@@ -73,6 +73,8 @@
 ] @string
 
 
+(regex) @string.special
+
 (character) @character
 (escape_sequence) @string.escape
 

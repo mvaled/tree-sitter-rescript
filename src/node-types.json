@@ -282,6 +282,10 @@
         "named": true
       },
       {
+        "type": "regex",
+        "named": true
+      },
+      {
         "type": "string",
         "named": true
       },
@@ -487,6 +491,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "spread_pattern",
           "named": true
         },
@@ -591,6 +599,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -1080,6 +1092,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1233,6 +1249,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -1443,6 +1463,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -2245,6 +2269,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -2355,6 +2383,10 @@
           },
           {
             "type": "record_pattern",
+            "named": true
+          },
+          {
+            "type": "regex",
             "named": true
           },
           {
@@ -2503,6 +2535,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -2993,6 +3029,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -3101,6 +3141,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -3246,6 +3290,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -3614,6 +3662,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -3743,6 +3795,10 @@
           "named": true
         },
         {
+          "type": "regex",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -3813,6 +3869,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "regex",
+    "named": true,
+    "fields": {
+      "flags": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "regex_flags",
+            "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "regex_pattern",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4036,6 +4118,10 @@
           },
           {
             "type": "record_pattern",
+            "named": true
+          },
+          {
+            "type": "regex",
             "named": true
           },
           {
@@ -4273,6 +4359,10 @@
         },
         {
           "type": "record_pattern",
+          "named": true
+        },
+        {
+          "type": "regex",
           "named": true
         },
         {
@@ -5109,6 +5199,14 @@
   {
     "type": "rec",
     "named": false
+  },
+  {
+    "type": "regex_flags",
+    "named": true
+  },
+  {
+    "type": "regex_pattern",
+    "named": true
   },
   {
     "type": "string_fragment",
