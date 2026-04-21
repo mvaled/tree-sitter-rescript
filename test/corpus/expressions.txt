@@ -635,6 +635,59 @@ switch foo {
             (number)))))))
 
 ================================================================================
+Variant Pattern Spread
+================================================================================
+
+let handle = (event: extended) =>
+  switch event {
+  | ...base as core => Console.log2("base", core)
+  | Resume => Console.log("resuming")
+  }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_declaration
+    (let_binding
+      pattern: (value_identifier)
+      body: (function
+        parameters: (formal_parameters
+          (parameter
+            (value_identifier)
+            (type_annotation
+              (type_identifier))))
+        body: (switch_expression
+          (value_identifier)
+          (switch_match
+            pattern: (variant_spread_pattern
+              (variant_type_pattern
+                (type_identifier))
+              (as_aliasing
+                (value_identifier)))
+            body: (sequence_expression
+              (expression_statement
+                (call_expression
+                  function: (value_identifier_path
+                    (module_identifier)
+                    (value_identifier))
+                  arguments: (arguments
+                    (string
+                      (string_fragment))
+                    (value_identifier))))))
+          (switch_match
+            pattern: (variant_pattern
+              (variant_identifier))
+            body: (sequence_expression
+              (expression_statement
+                (call_expression
+                  function: (value_identifier_path
+                    (module_identifier)
+                    (value_identifier))
+                  arguments: (arguments
+                    (string
+                      (string_fragment))))))))))))
+
+================================================================================
 Switch of polyvars
 ================================================================================
 
@@ -1226,6 +1279,7 @@ Math operators
 - 1 + 2 / 3
 -. 1.0 +. 2.0 /. 3.0
 2.0 ** 3.0
+5 % 2
 -0l
 -ln
 
@@ -1246,6 +1300,10 @@ Math operators
       (binary_expression
         (number)
         (number))))
+  (expression_statement
+    (binary_expression
+      (number)
+      (number)))
   (expression_statement
     (binary_expression
       (number)
@@ -1287,6 +1345,65 @@ i && j;
           (value_identifier))
         (unary_expression
           (value_identifier))))))
+
+================================================================================
+Bitwise operators
+================================================================================
+
+a &&& b;
+a ||| b;
+a ^^^ b;
+~~~a;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (unary_expression
+      (value_identifier))))
+
+================================================================================
+Shift operators
+================================================================================
+
+a << b;
+a >> b;
+a >>> b;
+a << b + c;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (value_identifier)))
+  (expression_statement
+    (binary_expression
+      (value_identifier)
+      (binary_expression
+        (value_identifier)
+        (value_identifier)))))
 
 ================================================================================
 String operators
@@ -1376,6 +1493,41 @@ Arrays
     (array
       (number)
       (number))))
+
+================================================================================
+Array spreads
+================================================================================
+
+let animals = ["🐶", "🐱", "🐷"]
+let moreAnimals = [...animals, "🐔", "🐴", "🐮", ...otherAnimals]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_declaration
+    (let_binding
+      pattern: (value_identifier)
+      body: (array
+        (string
+          (string_fragment))
+        (string
+          (string_fragment))
+        (string
+          (string_fragment)))))
+  (let_declaration
+    (let_binding
+      pattern: (value_identifier)
+      body: (array
+        (spread_element
+          (value_identifier))
+        (string
+          (string_fragment))
+        (string
+          (string_fragment))
+        (string
+          (string_fragment))
+        (spread_element
+          (value_identifier))))))
 
 ================================================================================
 Lists

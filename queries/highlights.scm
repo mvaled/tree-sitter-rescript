@@ -225,6 +225,9 @@
   "**"
   "*."
   "/."
+  "<<"
+  ">>"
+  ">>>"
   "<="
   "=="
   "==="
@@ -232,8 +235,12 @@
   "!="
   "!=="
   ">="
+  "&&&"
   "&&"
+  "|||"
   "||"
+  "^^^"
+  "~~~"
   "="
   ":="
   "->"
@@ -245,8 +252,8 @@
 ] @operator
 
 ; Explicitly enclose these operators with binary_expression
-; to avoid confusion with JSX tag delimiters
-(binary_expression ["<" ">" "/"] @operator)
+; to avoid confusion with JSX tag delimiters and extension expressions.
+(binary_expression ["<" ">" "/" "%"] @operator)
 
 [
   "("
