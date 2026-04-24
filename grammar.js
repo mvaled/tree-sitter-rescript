@@ -253,7 +253,7 @@ module.exports = grammar({
         optional("export"),
         "type",
         optional("rec"),
-        sep1(seq(repeat($._newline), "and"), $.type_binding),
+        sep1("and", $.type_binding),
       ),
 
     type_binding: ($) =>
@@ -418,7 +418,7 @@ module.exports = grammar({
       seq(
         choice("export", "let"),
         optional("rec"),
-        sep1(seq(repeat($._newline), "and"), $.let_binding),
+        sep1("and", $.let_binding),
       ),
 
     let_binding: ($) =>

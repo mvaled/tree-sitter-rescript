@@ -37,6 +37,12 @@ switch foo {
 // in-switch
 }
 
+switch foo {
+| 1 => 1
+/* block comment in switch */
+| 2 => 2
+}
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -80,4 +86,18 @@ switch foo {
         (sequence_expression
           (expression_statement
             (number))))
-      (line_comment))))
+      (line_comment)))
+  (expression_statement
+    (switch_expression
+      (value_identifier)
+      (switch_match
+        (number)
+        (sequence_expression
+          (expression_statement
+            (number))))
+      (block_comment)
+      (switch_match
+        (number)
+        (sequence_expression
+          (expression_statement
+            (number)))))))

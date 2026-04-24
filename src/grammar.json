@@ -782,20 +782,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_newline"
-                        }
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "and"
-                      }
-                    ]
+                    "type": "STRING",
+                    "value": "and"
                   },
                   {
                     "type": "SYMBOL",
@@ -2227,20 +2215,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_newline"
-                        }
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "and"
-                      }
-                    ]
+                    "type": "STRING",
+                    "value": "and"
                   },
                   {
                     "type": "SYMBOL",
