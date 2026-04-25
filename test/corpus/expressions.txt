@@ -1608,6 +1608,8 @@ Subscript expressions
 
 myArray[42]
 myObj["foo"]
+andd[0]
+andd[1]
 
 --------------------------------------------------------------------------------
 
@@ -1620,7 +1622,16 @@ myObj["foo"]
     (subscript_expression
       (value_identifier)
       (string
-        (string_fragment)))))
+        (string_fragment))))
+
+  (expression_statement
+        (subscript_expression
+          (value_identifier)
+          (number)))
+  (expression_statement
+    (subscript_expression
+      (value_identifier)
+      (number))))
 
 ================================================================================
 Variants
