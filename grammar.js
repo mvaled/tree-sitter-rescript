@@ -89,8 +89,6 @@ module.exports = grammar({
     [$.list, $.list_pattern],
     [$.array, $.array_pattern],
     [$.dict, $.dict_pattern],
-    [$.type_declaration],
-    [$.let_declaration],
     [$.variant_identifier, $.module_identifier],
     [$.variant, $.variant_pattern],
     [$.variant_arguments, $._variant_pattern_parameters],
@@ -100,6 +98,7 @@ module.exports = grammar({
     [$._record_pun_field, $._record_single_pun_field],
     [$._record_field_name, $.record_pattern],
     [$._statement, $._one_or_more_statements],
+    [$._statement, $._switch_body],
     [$._inline_type, $.function_type_parameters],
     [$.primary_expression, $.parameter, $._pattern],
     [$.parameter, $._pattern],
@@ -133,6 +132,13 @@ module.exports = grammar({
 
     _one_or_more_statements: ($) =>
       seq(repeat($._statement), $.statement, optional($._statement_delimeter)),
+
+    // Like _one_or_more_statements but without a trailing delimiter.
+    // Used as switch_match / try-catch bodies so that trailing NEWLINEs
+    // (including those emitted between consecutive block comments) are
+    // absorbed by the enclosing switch/try rule instead of being orphaned.
+    _switch_body: ($) =>
+      seq(repeat($._statement), $.statement),
 
     statement: ($) =>
       choice(
@@ -253,7 +259,7 @@ module.exports = grammar({
         optional("export"),
         "type",
         optional("rec"),
-        sep1(seq(repeat($._newline), "and"), $.type_binding),
+        sep1("and", $.type_binding),
       ),
 
     type_binding: ($) =>
@@ -418,7 +424,7 @@ module.exports = grammar({
       seq(
         choice("export", "let"),
         optional("rec"),
-        sep1(seq(repeat($._newline), "and"), $.let_binding),
+        sep1("and", $.let_binding),
       ),
 
     let_binding: ($) =>
@@ -589,7 +595,13 @@ module.exports = grammar({
     else_clause: ($) => seq("else", $.block),
 
     switch_expression: ($) =>
-      seq("switch", $.expression, "{", repeat($.switch_match), "}"),
+      seq(
+        "switch",
+        $.expression,
+        "{",
+        repeat(seq($.switch_match, repeat($._statement_delimeter))),
+        "}",
+      ),
 
     switch_match: ($) =>
       prec.dynamic(
@@ -601,7 +613,7 @@ module.exports = grammar({
           "=>",
           field(
             "body",
-            alias($._one_or_more_statements, $.sequence_expression),
+            alias($._switch_body, $.sequence_expression),
           ),
         ),
       ),
@@ -616,7 +628,14 @@ module.exports = grammar({
       seq($.variant_type_pattern, optional($.as_aliasing)),
 
     try_expression: ($) =>
-      seq("try", $.expression, "catch", "{", repeat($.switch_match), "}"),
+      seq(
+        "try",
+        $.expression,
+        "catch",
+        "{",
+        repeat(seq($.switch_match, repeat($._statement_delimeter))),
+        "}",
+      ),
 
     as_aliasing: ($) =>
       prec.left(seq("as", $._pattern, optional($.type_annotation))),

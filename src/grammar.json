@@ -94,6 +94,22 @@
         }
       ]
     },
+    "_switch_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "statement"
+        }
+      ]
+    },
     "statement": {
       "type": "CHOICE",
       "members": [
@@ -782,20 +798,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_newline"
-                        }
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "and"
-                      }
-                    ]
+                    "type": "STRING",
+                    "value": "and"
                   },
                   {
                     "type": "SYMBOL",
@@ -2227,20 +2231,8 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_newline"
-                        }
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "and"
-                      }
-                    ]
+                    "type": "STRING",
+                    "value": "and"
                   },
                   {
                     "type": "SYMBOL",
@@ -3445,8 +3437,20 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "switch_match"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "switch_match"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_statement_delimeter"
+                }
+              }
+            ]
           }
         },
         {
@@ -3505,7 +3509,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_one_or_more_statements"
+                "name": "_switch_body"
               },
               "named": true,
               "value": "sequence_expression"
@@ -3609,8 +3613,20 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "switch_match"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "switch_match"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_statement_delimeter"
+                }
+              }
+            ]
           }
         },
         {
@@ -9052,12 +9068,6 @@
       "dict_pattern"
     ],
     [
-      "type_declaration"
-    ],
-    [
-      "let_declaration"
-    ],
-    [
       "variant_identifier",
       "module_identifier"
     ],
@@ -9091,6 +9101,10 @@
     [
       "_statement",
       "_one_or_more_statements"
+    ],
+    [
+      "_statement",
+      "_switch_body"
     ],
     [
       "_inline_type",
