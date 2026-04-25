@@ -89,8 +89,6 @@ module.exports = grammar({
     [$.list, $.list_pattern],
     [$.array, $.array_pattern],
     [$.dict, $.dict_pattern],
-    [$.type_declaration],
-    [$.let_declaration],
     [$.variant_identifier, $.module_identifier],
     [$.variant, $.variant_pattern],
     [$.variant_arguments, $._variant_pattern_parameters],
@@ -755,7 +753,7 @@ module.exports = grammar({
         -1,
         seq(
           choice(
-            $.value_identifier,
+            seq(optional("?"), $.value_identifier),
             $._literal_pattern,
             $._destructuring_pattern,
             $.polyvar_type_pattern,

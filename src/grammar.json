@@ -4298,8 +4298,25 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "value_identifier"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "?"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "value_identifier"
+                  }
+                ]
               },
               {
                 "type": "SYMBOL",
@@ -9049,12 +9066,6 @@
     [
       "dict",
       "dict_pattern"
-    ],
-    [
-      "type_declaration"
-    ],
-    [
-      "let_declaration"
     ],
     [
       "variant_identifier",
