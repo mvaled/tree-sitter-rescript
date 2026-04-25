@@ -94,6 +94,22 @@
         }
       ]
     },
+    "_switch_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "statement"
+        }
+      ]
+    },
     "statement": {
       "type": "CHOICE",
       "members": [
@@ -3421,8 +3437,20 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "switch_match"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "switch_match"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_statement_delimeter"
+                }
+              }
+            ]
           }
         },
         {
@@ -3481,7 +3509,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_one_or_more_statements"
+                "name": "_switch_body"
               },
               "named": true,
               "value": "sequence_expression"
@@ -3585,8 +3613,20 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "switch_match"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "switch_match"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_statement_delimeter"
+                }
+              }
+            ]
           }
         },
         {
@@ -9050,6 +9090,10 @@
     [
       "_statement",
       "_one_or_more_statements"
+    ],
+    [
+      "_statement",
+      "_switch_body"
     ],
     [
       "_inline_type",

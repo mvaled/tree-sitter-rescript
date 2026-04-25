@@ -43,6 +43,14 @@ switch foo {
 | 2 => 2
 }
 
+switch l {
+| "a" => letterAll
+/* | "b" => [||] */
+/* | "g" => [||] */
+/* | "h" => [||] */
+/* | "i" => [||] */
+}
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -100,4 +108,17 @@ switch foo {
         (number)
         (sequence_expression
           (expression_statement
-            (number)))))))
+            (number))))))
+  (expression_statement
+    (switch_expression
+      (value_identifier)
+      (switch_match
+        (string
+          (string_fragment))
+        (sequence_expression
+          (expression_statement
+            (value_identifier))))
+      (block_comment)
+      (block_comment)
+      (block_comment)
+      (block_comment))))
